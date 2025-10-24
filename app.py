@@ -10,7 +10,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 
-#st.set_option('deprecation.showPyplotGlobalUse', False)
 st.title("❤️ Heart Disease Prediction Dashboard")
 
 # Load dataset
@@ -19,7 +18,7 @@ df = pd.read_csv("heart.csv")
 st.subheader("📊 Dataset Overview")
 st.write(df.head())
 
-# Correlation heatmap
+# Correlation
 st.subheader("🔍 Correlation Heatmap")
 fig, ax = plt.subplots(figsize=(10, 8))
 sns.heatmap(df.corr(), annot=True, cmap="coolwarm", ax=ax)
@@ -60,7 +59,7 @@ plt.title("Model Accuracy Comparison")
 plt.ylabel("Accuracy")
 st.pyplot(fig2)
 
-# Model selection
+# selection
 st.subheader("🩺 Make a Prediction")
 selected_model_name = st.selectbox("Choose a model:", list(models.keys()))
 model = models[selected_model_name]
@@ -80,7 +79,7 @@ slp = st.selectbox("Slope of the Peak Exercise ST Segment (0–2)", [0, 1, 2])
 caa = st.number_input("Number of Major Vessels (0–4)", 0, 4, 0)
 thall = st.selectbox("Thalassemia (0–3)", [0, 1, 2, 3])
 
-# Prediction
+# prediction
 if st.button("🔍 Predict"):
     user_data = np.array([[age, sex, cp, trtbps, chol, fbs, restecg,
                            thalachh, exng, oldpeak, slp, caa, thall]])
@@ -92,7 +91,7 @@ if st.button("🔍 Predict"):
     else:
         st.success(f"✅ {selected_model_name} predicts a **low risk** of heart disease.")
 
-# Evaluation section
+# evaluation section
 st.subheader("📈 Model Evaluation (Confusion Matrix & ROC Curve)")
 if st.button("Show Evaluation"):
     # Confusion Matrix
@@ -123,3 +122,4 @@ if st.button("Show Evaluation"):
         st.pyplot(fig4)
     else:
         st.warning(f"The selected model ({selected_model_name}) does not support probability outputs.")
+
